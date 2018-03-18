@@ -59,6 +59,17 @@ export class LoginPage {
         );
 
     }
+
+    public redirectPage(res: any) {
+        this.cookieService.putObject("usuarioAtual", res);
+        this.navCtrl.setRoot(TabsPage);
+    }
+
+    redirectUser(response) {
+        this.cookieService.removeAll();
+        this.cookieService.put("accessToken", response.access_token);
+        this.cookieService.put("refreshToken", response.refresh_token);
+    }
     private goToSignup(): void {
                 if (this.loginForm.valid) {
                     this.loginService.cadastro(this.loginForm.value).subscribe(
@@ -71,20 +82,9 @@ export class LoginPage {
         -        );*/
             }
             public cadastroSuccess(res: any) {
-                       this.cookieService.removeAll();
+                        this.cookieService.removeAll();
                         this.cookieService.put("accessToken", res.access_token);
                         this.cookieService.put("refreshToken", res.refresh_token);
                     }
-    public redirectPage(res: any) {
-        this.cookieService.putObject("usuarioAtual", res);
-        this.navCtrl.setRoot(TabsPage);
-    }
-
-    redirectUser(response) {
-        this.cookieService.removeAll();
-        this.cookieService.put("accessToken", response.access_token);
-        this.cookieService.put("refreshToken", response.refresh_token);
-    }
-
-
+                    
 }

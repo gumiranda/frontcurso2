@@ -14,8 +14,7 @@ import 'rxjs/add/operator/take';
 @Injectable()
 export class InterceptorHttpService implements HttpInterceptor {
 
-    constructor(private cookieService: CookieService, 
-        private loginService: LoginServiceProvider) { }
+    constructor(private cookieService: CookieService, private loginService: LoginServiceProvider) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler):
         Observable<HttpSentEvent | HttpHeaderResponse |
