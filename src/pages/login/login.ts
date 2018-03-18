@@ -22,6 +22,7 @@ import { CookieService } from 'angular2-cookie/core';
 export class LoginPage {
     public loginForm;
     loading: any;
+
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -40,7 +41,6 @@ export class LoginPage {
     }
 
     private loginUser(): void {
-    
         if (this.loginForm.valid) {
             this.loginService.login(this.loginForm.value).subscribe(
                 res => this.loginSuccess(res)
@@ -49,17 +49,7 @@ export class LoginPage {
             this.loading.present();
         }
     }
-    private goToSignup(): void {
-        if (this.loginForm.valid) {
-            this.loginService.cadastro(this.loginForm.value).subscribe(
-                res => this.cadastroSuccess(res)
-            );    } else {
-            this.loading.present();
-        }
-      /*  this.loginService.login(this.loginForm.value).subscribe(
-            res => this.loginSuccess(res)
-        );*/
-    }
+
     public loginSuccess(res: any) {
         this.cookieService.removeAll();
         this.cookieService.put("accessToken", res.access_token);
@@ -69,12 +59,6 @@ export class LoginPage {
         );
 
     }
-    public cadastroSuccess(res: any) {
-        this.cookieService.removeAll();
-        this.cookieService.put("accessToken", res.access_token);
-        this.cookieService.put("refreshToken", res.refresh_token);
-    }
-
 
     public redirectPage(res: any) {
         this.cookieService.putObject("usuarioAtual", res);

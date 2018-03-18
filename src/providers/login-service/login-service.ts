@@ -17,26 +17,11 @@ export class LoginServiceProvider {
   private refreshUrl: string;
   public handleError: any;
   public userUrl:string;
-  public cadastroUrl:string;
 
   constructor(public http: Http, public requestOptions:RequestOptions) {
     this.loginUrl = Utils.getUrlBackend() + "oauth/token?grant_type=password&username=";
     this.refreshUrl = Utils.getUrlBackend() + "oauth/token?grant_type=refresh_token&refresh_token=";
     this.userUrl  = Utils.getUrlBackend() + "usuario/logado";
-    this.cadastroUrl  = Utils.getUrlBackend() + "usuario";
-
-  }
-  public cadastro(usuario: Usuario): Observable<any> {
-  let headers = new Headers({'Content-Type' : 'application/json',
-  "Authorization": "Basic " + btoa("cliente" + ':' + "123")
-  });
- 
-   // headers.append('Content-Type', 'application/json')
-
-    let options = new RequestOptions({ headers: headers });
-    return this.http.post(this.cadastroUrl,JSON.stringify(usuario), options)
-      .map(res => res.json());
-
   }
 
   public login(usuario: Usuario): Observable<any> {
